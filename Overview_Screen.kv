@@ -1,0 +1,119 @@
+#:kivy 2.3.1
+
+ScreenManager:
+    OverviewScreen:
+
+<OverviewScreen>:
+    name: "overview"
+
+    MDBoxLayout:
+        orientation: "vertical"
+        size_hint: 1, 1
+        padding: "12dp"
+        spacing: "12dp"
+        md_bg_color: app.theme_cls.backgroundColor
+
+        MDBoxLayout:
+            orientation: "horizontal"
+            size_hint: (1, 0.05)
+            spacing: "12dp"
+            MDLabel:
+                id: datetime_label
+                padding: ("12dp", 0, 0, 0)
+                halign: "left"
+                font_style: "Headline"
+                role: "medium"
+                adaptive_height: True
+                size_hint: (0.3, None)
+                pos_hint: {"center_y": 0.5, "left": 0}
+
+            MDLabel:
+                text: "Remote Launch Control Unit"
+                font_style: "Headline"
+                role: "medium"
+                halign: "center"
+                adaptive_height: True
+                pos_hint: {"center_y": 0.5}
+
+            MDButton:
+                adaptive_height: True
+                size_hint: (0.175, None)
+                pos_hint: {"center_y": 0.5}
+                on_release: root.show_serial_dialog()
+                MDButtonText:
+                    id: serial_label
+                    text: "Serial"
+                    font_style: "Headline"
+                    role: "small"
+                    theme_text_color: "Custom"
+                    text_color: 1, 0, 0, 1
+                MDButtonIcon:
+                    icon: "cog"
+                    size_hint: (0.05, 1)    
+            MDButton:
+                adaptive_height: True
+                size_hint: (0.175, None)
+                pos_hint: {"center_y": 0.5}
+                on_release: root.show_socket_dialog()
+                MDButtonText:
+                    id: socket_label
+                    text: "Socket"
+                    font_style: "Headline"
+                    role: "small"
+                    theme_text_color: "Custom"
+                    text_color: 1, 0, 0, 1
+                MDButtonIcon:
+                    icon: "cog"
+                    size_hint: (0.05, 1)    
+            MDIconButton:
+                icon: "close"
+                size_hint: (0.05, 1)
+                on_release: root.show_exit_dialog()
+
+        MDDivider:
+            height: "1dp"
+            md_bg_color: 0, 0, 0, 1
+
+        MDBoxLayout:
+            orientation: "horizontal"
+            size_hint: (1, 0.35)
+            spacing: "42dp"
+            padding: ("42dp", "30dp", "42dp", "0dp") # left, top, right, bottom
+            Image:
+                source: "assets/LASC.png"
+                size_hint: (0.3333, 0.5)
+                pos_hint: {"center_x": 0.5, "center_y": 0.5}
+            Image:
+                source: "assets/6LASC.png"
+                size_hint: (0.3333, 1)
+                pos_hint: {"center_x": 0.5, "center_y": 0.5}
+            MDCard:
+                size_hint: (0.3333, 1)
+                pos_hint: {"center_x": 0.5, "center_y": 0.5}
+                orientation: "vertical"
+                style: "outlined"
+                md_theme_color: "Custom"
+                theme_bg_color: "Custom"
+                md_bg_color: "lightgrey"
+                padding: "12dp"
+                spacing: "12dp"
+                on_release: root.show_flag_dialog()
+                MDLabel:
+                    text: "Launch Area Status"
+                    halign: "center"
+                    font_style: "Display"
+                    role: "medium"
+                    adaptive_height: True
+                Image:
+                    id: flag_image
+                    source: "assets/greenflag.png"
+                    size_hint: (1, 0.7)
+                    pos_hint: {"center_x": 0.5, "center_y": 0.5}
+        MDGridLayout:
+            id: pad_grid
+            cols: 3
+            rows: 2
+            spacing: "42dp"
+            padding: "42dp"
+            pos_hint: {"center_x": 0.5, "center_y": 0.5}
+            size_hint: (1, 0.6)

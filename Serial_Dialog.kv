@@ -1,0 +1,42 @@
+#:kivy 2.3.1
+
+<SerialDialog>:
+    orientation: "vertical"
+    spacing: "10dp"
+    padding: ("20dp", "20dp", "20dp", "10dp")
+    size_hint_y: None
+    height: "100dp"
+    MDBoxLayout:
+        id: com_port_box
+        orientation: "horizontal"
+        spacing: "8dp"
+        size_hint_y: None
+        height: "40dp"
+        MDLabel:
+            text: "COM Port"
+            halign: "left"
+            size_hint_x: 0.6
+        MDButton:
+            id: com_dropdown_btn
+            style: "outlined"
+            size_hint_x: 0.4
+            height: "40dp"
+            MDButtonText:
+                text: ""
+    MDBoxLayout:
+        id: baudrate_box
+        orientation: "horizontal"
+        spacing: "8dp"
+        size_hint_y: None
+        height: "40dp"
+        MDLabel:
+            text: "Baudrate"
+            halign: "left"
+            size_hint_x: 0.6
+        MDButton:
+            id: baudrate_dropdown_btn
+            style: "outlined"
+            size_hint_x: 0.4
+            height: "40dp"
+            MDButtonText:
+                text: ""

@@ -1,0 +1,53 @@
+#:kivy 2.3.1
+
+<SocketDialog>:
+    orientation: "vertical"
+    spacing: "10dp"
+    padding: ("20dp", "20dp", "20dp", "10dp")
+    size_hint_y: None
+    height: "125dp"
+    #MDBoxLayout:
+    #    orientation: "horizontal"
+    #    spacing: "8dp"
+    #    size_hint_y: None
+    #    height: "65dp"
+    #    MDLabel:
+    #        text: "Broadcast IP"
+    #        halign: "left"
+    #        size_hint_x: 0.6
+    #    MDTextField:
+    #        id: broadcast_ip_field
+    #        mode: "outlined"
+    #        size_hint_x: 0.4
+    #        MDTextFieldHintText:
+    #            text: "e.g., 192.168.1.255"
+    MDBoxLayout:
+        orientation: "horizontal"
+        spacing: "8dp"
+        size_hint_y: None
+        height: "65dp"
+        MDLabel:
+            text: "Port"
+            halign: "left"
+            size_hint_x: 0.6
+        MDTextField:
+            id: port_field
+            mode: "outlined"
+            size_hint_x: 0.4
+            input_filter: "int"
+            MDTextFieldHintText:
+                text: "e.g., 12345"
+            MDTextFieldMaxLengthText:
+				max_text_length: 5
+    #MDBoxLayout:
+    #    orientation: "horizontal"
+    #    spacing: "8dp"
+    #    size_hint_y: None
+    #    height: "65dp"
+    #    MDLabel:
+    #        text: "Unicast TX Mode"
+    #        halign: "left"
+    #        size_hint_x: 0.6
+    #    MDCheckbox:
+    #        id: unicast_tx_mode_checkbox
+    #        pos_hint: {"center_y": 0.5}

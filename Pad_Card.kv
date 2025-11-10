@@ -1,0 +1,81 @@
+#:kivy 2.3.1
+
+<PadCard>:
+    id: padcard1
+    size_hint: 1, 1
+    style: "outlined"
+    md_theme_color: "Custom"
+    theme_bg_color: "Custom"
+    md_bg_color: "lightgrey"
+    ripple_behavior: True
+    on_release: app.root.get_screen("pad_detail").pad_num = root.pad_num; app.root.current = "pad_detail"
+    orientation: "vertical"
+    padding: "24dp"
+    spacing: "12dp"
+
+    MDLabel:
+        text: f"Launch Pad {root.pad_num+1}{root.pad_letter}"
+        halign: "center"
+        font_style: "Display"
+        role: "medium"
+        size_hint_y: 0.25
+    MDLabel:
+        id: team_id_label
+        text: f"Team {root.team_id:04d}"
+        halign: "center"
+        font_style: "Headline"
+        role: "small"
+        size_hint_y: 0.05
+    MDDivider:
+        height: "1dp"
+        md_bg_color: 0, 0, 0, 1
+    Widget:
+        size_hint_y: 0.01
+    MDGridLayout:
+        cols: 2
+        rows: 3
+        spacing: "36dp"
+        size_hint_y: 0.7
+        MDLabel:
+            text: "Arm"
+            halign: "right"
+            font_style: "Headline"
+            role: "medium"
+            size_hint: (0.5, 0.333)
+                
+        MDLabel:
+            text: "ARMED" if root.arm_status else "SAFE"
+            halign: "left"
+            font_style: "Headline"
+            role: "medium"
+            theme_text_color: "Custom"
+            text_color: root.arm_color
+            size_hint: (0.5, 0.333)
+        MDLabel:
+            text: "Continuity"
+            halign: "right"
+            font_style: "Headline"
+            role: "medium"
+            size_hint: (0.5, 0.333)
+        MDLabel:
+            text: "OK" if root.continuity else "OPEN"
+            halign: "left"
+            font_style: "Headline"
+            role: "medium"
+            theme_text_color: "Custom"
+            text_color: root.continuity_color
+            size_hint: (0.5, 0.333)
+        MDLabel:
+            text: "Last Online"
+            halign: "right"
+            font_style: "Headline"
+            role: "medium"
+            size_hint: (0.5, 0.333)
+        MDLabel:
+            text: f"{root.last_seen} s"
+            halign: "left"
+            font_style: "Headline"
+            role: "medium"
+            theme_text_color: "Custom"
+            text_color: root.last_seen_color
+            size_hint: (0.5, 0.333)

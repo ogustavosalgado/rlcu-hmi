@@ -1,0 +1,459 @@
+#:kivy 2.3.1
+
+<PadDetailScreen>:
+	MDBoxLayout:
+        orientation: "vertical"
+        size_hint: 1, 1
+        padding: "12dp"
+        spacing: "12dp"
+        md_bg_color: app.theme_cls.backgroundColor
+
+		MDBoxLayout:
+            orientation: "horizontal"
+            size_hint: (1, 0.05)
+            spacing: "12dp"
+
+			MDLabel:
+                id: datetime_label
+                padding: ("12dp", 0, 0, 0)
+                halign: "left"
+                font_style: "Headline"
+                role: "medium"
+                adaptive_height: True
+                size_hint: (0.3, None)
+                pos_hint: {"center_y": 0.5, "left": 0}
+
+            MDLabel:
+                text: f"Launch Pad {root.pad_num+1}{root.pad_letter} Detail"
+                font_style: "Headline"
+                role: "medium"
+                halign: "center"
+                adaptive_height: True
+                pos_hint: {"center_y": 0.5}
+
+            MDButton:
+                adaptive_height: True
+                size_hint: (0.175, None)
+                pos_hint: {"center_y": 0.5}
+
+				MDButtonIcon:
+					icon: "circle"
+					size_hint: (0.05, 1)
+
+				MDButtonText:
+                    id: serial_label
+                    text: "Serial"
+                    font_style: "Headline"
+                    role: "small"
+                    theme_text_color: "Custom"
+                    text_color: 1, 0, 0, 1
+
+			MDButton:
+                adaptive_height: True
+                size_hint: (0.175, None)
+                pos_hint: {"center_y": 0.5}
+
+				MDButtonIcon:
+					icon: "circle"
+					size_hint: (0.05, 1)
+
+				MDButtonText:
+                    id: socket_label
+                    text: "Socket"
+                    font_style: "Headline"
+                    role: "small"
+                    theme_text_color: "Custom"
+                    text_color: 1, 0, 0, 1
+
+
+			MDIconButton:
+	        	icon: "arrow-left"
+	        	adaptive_height: True
+	            size_hint: (0.05, 1)
+				on_release: app.root.current = "overview"
+
+		MDDivider:
+            height: "1dp"
+            md_bg_color: 0, 0, 0, 1
+
+		MDBoxLayout:
+            orientation: "horizontal"
+            size_hint: (1, 0.35)
+            spacing: "42dp"
+            padding: ("42dp", "30dp", "42dp", "0dp") # left, top, right, bottom
+
+            MDCard:
+                size_hint: (0.3333, 1)
+                pos_hint: {"center_x": 0.5, "center_y": 0.5}
+                orientation: "vertical"
+                padding: "24dp"
+                spacing: "12dp"
+				style: "outlined"
+				md_theme_color: "Custom"
+				theme_bg_color: "Custom"
+				md_bg_color: "lightgrey"
+    			ripple_behavior: True
+
+        		MDLabel:
+        		    text: "RLCU Box Status"
+        		    halign: "center"
+        		    font_style: "Display"
+        		    role: "medium"
+        		    adaptive_height: True
+        		MDLabel:
+        		    text: f"Last Online {root.last_seen} seconds ago"
+        		    halign: "center"
+        		    font_style: "Headline"
+        		    role: "small"
+					theme_text_color: "Custom"
+        		    text_color: root.last_seen_color
+        		    size_hint_y: 0.05
+
+        		MDDivider:
+        		    height: "1dp"
+        		    md_bg_color: 0, 0, 0, 1
+        		MDGridLayout:
+        		    cols: 2
+        		    rows: 4
+        		    spacing: "36dp"
+        		    padding: ("24dp", "24dp", "24dp", "0dp") # left, top, right, bottom
+        		    size_hint_y: 0.7
+        		    MDLabel:
+        		        text: "IP Address"
+        		        halign: "right"
+        		        font_style: "Headline"
+        		        role: "medium"
+        		        size_hint: (0.5, 0.25)
+        		    MDLabel:
+        		        text: root.ip_address
+        		        halign: "left"
+        		        font_style: "Headline"
+        		        role: "medium"
+        		        theme_text_color: "Custom"
+        		        size_hint: (0.5, 0.25)
+        		    MDLabel:
+        		        text: "RSSI"
+        		        halign: "right"
+        		        font_style: "Headline"
+        		        role: "medium"
+        		        size_hint: (0.5, 0.25)
+        		    MDLabel:
+        		        text: f"{root.rssi:.1f} dBm"
+        		        halign: "left"
+        		        font_style: "Headline"
+        		        role: "medium"
+        		        theme_text_color: "Custom"
+        		        text_color: root.rssi_color
+        		        size_hint: (0.5, 0.25)
+					MDLabel:
+        		        text: "Battery Voltage"
+        		        halign: "right"
+        		        font_style: "Headline"
+        		        role: "medium"
+        		        size_hint: (0.5, 0.25)
+        		    MDLabel:
+        		        text: f"{root.voltage:.1f} V"
+        		        halign: "left"
+        		        font_style: "Headline"
+        		        role: "medium"
+        		        theme_text_color: "Custom"
+        		        text_color: root.voltage_color
+        		        size_hint: (0.5, 0.25)
+
+            MDCard:
+                size_hint: (0.3333, 1)
+                orientation: "vertical"
+                padding: "12dp"
+                spacing: "12dp"
+				style: "outlined"
+				md_theme_color: "Custom"
+				theme_bg_color: "Custom"
+				md_bg_color: "lightgrey"
+				MDLabel:
+					size_hint_y: 0.25
+        		    text: "Configuration"
+        		    halign: "center"
+        		    font_style: "Display"
+        		    role: "medium"
+					adaptive_height: True
+				MDBoxLayout:
+        		    orientation: "horizontal"
+        		    spacing: "36dp"
+					padding: "36dp"
+					size_hint_y: 0.375
+					MDTextField:
+						id: team_id_field
+						text: "" if  root.team_id == 0 else f"{root.team_id:04d}"
+				        mode: "outlined"
+						input_filter: "int"
+						height: "40dp"
+						size_hint:(0.5, None)
+						on_text_validate: root.set_team_id()
+						MDTextFieldHintText:
+						    text: "Enter Team ID"
+					MDButton:
+						theme_width: "Custom"
+						size_hint:(0.5, None)
+						on_release: root.set_team_id()
+						MDButtonIcon:
+							icon: "pound-box"
+						MDButtonText:
+                		    text: "Set Team ID"
+                		    font_style: "Headline"
+                		    role: "small"
+				
+				MDBoxLayout:
+				    orientation: "horizontal"
+				    spacing: "36dp"
+				    size_hint_y: 0.375
+					padding: "36dp"
+					MDButton:
+						theme_width: "Custom"
+						size_hint:(0.5, None)
+						on_release: root.toggle_buzzer()
+						MDButtonIcon:
+							icon: "bullhorn"
+						MDButtonText:
+							id: buzzer_button_text
+                		    text: "Buzzer ON"
+                		    font_style: "Headline"
+                		    role: "small"
+							pos_hint: {"center_x": .5, "center_y": .5}
+					MDButton:
+						theme_width: "Custom"
+						size_hint:(0.5, None)
+						on_release: root.toggle_led()
+						MDButtonIcon:
+							icon: "connection"
+						MDButtonText:
+							id: led_button_text
+                		    text: "LED ON"
+                		    font_style: "Headline"
+                		    role: "small"
+							pos_hint: {"center_x": .5, "center_y": .5}
+
+            MDCard:
+                size_hint: (0.3333, 1)
+                pos_hint: {"center_x": 0.5, "center_y": 0.5}
+                orientation: "vertical"
+                padding: "12dp"
+                spacing: "12dp"
+				style: "outlined"
+				md_theme_color: "Custom"
+				theme_bg_color: "Custom"
+				md_bg_color: "lightgrey"
+                MDLabel:
+                    text: "Launch Area Status"
+                    halign: "center"
+                    font_style: "Display"
+                    role: "medium"
+					adaptive_height: True
+
+                Image:
+                    id: flag_image
+                    source: "assets/greenflag.png"
+                    size_hint: (1, 0.7)
+                    pos_hint: {"center_x": 0.5, "center_y": 0.5}
+
+		MDBoxLayout:
+			orientation: "horizontal"
+			size_hint: (1, 0.6)
+			spacing: "42dp"
+            padding: ("42dp", "30dp", "42dp", "42dp") # left, top, right, bottom
+			MDCard:
+				size_hint: (0.3255, 1)
+				orientation: "vertical"
+				padding: "12dp"
+				spacing: "12dp"
+				style: "outlined"
+				md_theme_color: "Custom"
+				theme_bg_color: "Custom"
+				md_bg_color: "lightgrey"
+    			ripple_behavior: True
+				MDLabel:
+        		    text: f"Launch Pad {root.pad_num+1}{root.pad_letter}"
+        		    halign: "center"
+        		    font_style: "Display"
+        		    role: "medium"
+        		    adaptive_height: True
+        		MDLabel:
+        		    text: f"Team {root.team_id}"
+        		    halign: "center"
+        		    font_style: "Headline"
+        		    role: "medium"
+        		    size_hint_y: 0.05
+
+        		MDDivider:
+        		    height: "1dp"
+        		    md_bg_color: 0, 0, 0, 1
+        		MDBoxLayout:
+        		    orientation: "vertical"
+        		    spacing: "36dp"
+        		    padding: ("24dp", "24dp", "24dp", "0dp") # left, top, right, bottom
+        		    size_hint_y: 0.7
+        		    MDLabel:
+        		        text: "ARM"
+            			halign: "center"
+            			font_style: "Display"
+            			role: "medium"
+            			size_hint: (1, 0.333)
+        		    MDLabel:
+        		        text: "ARMED" if root.arm_status else "SAFE"
+            			halign: "center"
+            			font_style: "Display"
+            			role: "medium"
+            			theme_text_color: "Custom"
+            			text_color: root.arm_color
+            			size_hint: (1, 0.333)
+					MDDivider:
+						height: "1dp"
+        		    	md_bg_color: 0, 0, 0, 1
+        		    MDLabel:
+        		        text: "CONTINUITY"
+            			halign: "center"
+            			font_style: "Display"
+            			role: "medium"
+            			size_hint: (1, 0.333)
+        		    MDLabel:
+        		        text: "OK" if root.continuity else "OPEN"
+            			halign: "center"
+            			font_style: "Display"
+            			role: "medium"
+            			theme_text_color: "Custom"
+            			text_color: root.continuity_color
+            			size_hint: (1, 0.333)
+			MDCard:
+				size_hint: (0.6745, 1)
+				orientation: "vertical"
+				padding: "24dp"
+				spacing: "24dp"
+				style: "outlined"
+				md_theme_color: "Custom"
+				theme_bg_color: "Custom"
+				md_bg_color: "lightgrey"
+				MDLabel:
+        		    text: "Launch Sequence"
+        		    halign: "center"
+        		    font_style: "Display"
+        		    role: "medium"
+        		    adaptive_height: True
+				MDBoxLayout:
+					orientation: "horizontal"
+					spacing: "12dp"
+					MDBoxLayout:
+						orientation: "vertical"
+						size_hint: (1, 1)
+						MDListItem:
+							size_hint_y: 0.25
+							md_theme_color: "Custom"
+							theme_bg_color: "Custom"
+							md_bg_color: "lightgrey"
+    						MDListItemLeadingIcon:
+								id: last_seen_icon
+    						    icon: "alert-circle"
+								theme_text_color: "Custom"
+            					text_color: root.last_seen_checklist_color
+								theme_font_size: "Custom"
+								font_size: "42sp"
+    						MDListItemHeadlineText:
+    						    text: f"Launch pad last online: {root.last_seen} s"
+								theme_text_color: "Custom"
+            					text_color: root.last_seen_checklist_color
+								font_style: "Headline"
+                    			role: "medium"
+						MDListItem:
+							size_hint_y: 0.25
+							md_theme_color: "Custom"
+							theme_bg_color: "Custom"
+							md_bg_color: "lightgrey"
+    						MDListItemLeadingIcon:
+								id: flag_icon
+    						    icon:  "alert-circle"
+								theme_text_color: "Custom"
+            					text_color: root.flag_checklist_color
+								theme_font_size: "Custom"
+								font_size: "42sp"
+    						MDListItemHeadlineText:
+    						    text: f"{root.flag_checklist_status}"
+								theme_text_color: "Custom"
+            					text_color: root.flag_checklist_color
+								font_style: "Headline"
+                    			role: "medium"
+						MDListItem:
+							size_hint_y: 0.25
+							md_theme_color: "Custom"
+							theme_bg_color: "Custom"
+							md_bg_color: "lightgrey"
+    						MDListItemLeadingIcon:
+								id: continuity_icon
+    						    icon:  "check-circle" if root.continuity else "alert-circle"
+								theme_text_color: "Custom"
+            					text_color: root.continuity_color
+								theme_font_size: "Custom"
+								font_size: "42sp"
+    						MDListItemHeadlineText:
+    						    text: "Igniter continuity OK" if root.continuity else "Igniter continuity ISSUE"
+								theme_text_color: "Custom"
+            					text_color: root.continuity_color
+								font_style: "Headline"
+                    			role: "medium"
+						MDListItem:
+							size_hint_y: 0.25
+							md_theme_color: "Custom"
+							theme_bg_color: "Custom"
+							md_bg_color: "lightgrey"
+    						MDListItemLeadingIcon:
+								id: arm_icon
+    						    icon: "check-circle" if root.arm_status else "alert-circle"
+								theme_text_color: "Custom"
+            					text_color: root.arm_checklist_color
+								theme_font_size: "Custom"
+								font_size: "42sp"
+    						MDListItemHeadlineText:
+    						    text: "Ignition box ARMED" if root.arm_status else "Ignition box SAFE"
+								theme_text_color: "Custom"
+            					text_color: root.arm_checklist_color
+								font_style: "Headline"
+                    			role: "medium"
+					MDDivider:
+						orientation: "vertical"
+					MDBoxLayout:
+						orientation: "vertical"
+						size_hint: (1, 1)
+						spacing: "24dp"
+						MDBoxLayout:
+							orientation: "horizontal"
+							size_hint: (1, 0.25)
+							padding: "24dp"
+							spacing: "24dp"
+							md_bg_color: (0.9, 1, 0.9)
+							MDLabel:
+								size_hint: (1, 1)
+								text: "I confirm the rocket is GO FOR LAUNCH and all safety checks have been performed."
+								halign: "left"
+								font_style: "Headline"
+								role: "small"
+								halign: "center"
+							MDCheckbox:
+								id: arm_hmi_checkbox
+								pos_hint: {"center_y": 0.5}
+								on_active: root.on_checkbox_active(*args)
+						MDCard:
+							id: launch_button
+							size_hint: (1, 0.75)
+							on_release: root.initiate_launch_sequence()
+							orientation: "horizontal"
+							style: "outlined"
+							padding: "48dp"
+							theme_bg_color: "Custom"
+							md_bg_color: (1, 0.7, 0.7)
+							MDLabel:
+								text: "INITIATE LAUNCH"
+								theme_font_size: "Custom"
+								font_size: "72sp"
+								halign: "center"
+							MDIcon:
+								icon: "rocket-launch"
+								theme_font_size: "Custom"
+								font_size: "94sp"
+								pos_hint: {"center_y": 0.5}
